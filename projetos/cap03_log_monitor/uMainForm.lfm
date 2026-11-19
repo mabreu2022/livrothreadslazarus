@@ -1,0 +1,180 @@
+object MainForm: TMainForm
+  Left = 320
+  Height = 560
+  Top = 180
+  Width = 780
+  Caption = 'Cap. 3 - Monitor de Logs em Alta Vazao (LCL Thread-Safety)'
+  ClientHeight = 560
+  ClientWidth = 780
+  Position = poScreenCenter
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  object PanelTop: TPanel
+    Left = 0
+    Height = 148
+    Top = 0
+    Width = 780
+    Align = alTop
+    BevelOuter = bvNone
+    BorderWidth = 8
+    ClientHeight = 148
+    ClientWidth = 780
+    TabOrder = 0
+    object RadioGroupMode: TRadioGroup
+      Left = 8
+      Height = 76
+      Top = 8
+      Width = 420
+      AutoFill = True
+      Caption = ' Estrategia de Atualizacao da Interface '
+      ChildSizing.LeftRightSpacing = 8
+      ChildSizing.TopBottomSpacing = 4
+      ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+      ChildSizing.EnlargeVertical = crsHomogenousChildResize
+      ChildSizing.ShrinkHorizontal = crsScaleChilds
+      ChildSizing.ShrinkVertical = crsScaleChilds
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 1
+      ClientHeight = 56
+      ClientWidth = 416
+      ItemIndex = 1
+      Items.Strings = (
+        'TThread.Synchronize ingenuo (1 evento por vez)'
+        'Application.QueueAsyncCall + Loteamento TThreadList'
+      )
+      TabOrder = 0
+    end
+    object LblTotal: TLabel
+      Left = 444
+      Height = 15
+      Top = 14
+      Width = 104
+      Caption = 'Total de eventos:'
+    end
+    object SpinTotal: TSpinEdit
+      Left = 444
+      Height = 23
+      Top = 32
+      Width = 110
+      Increment = 2000
+      MaxValue = 200000
+      MinValue = 1000
+      TabOrder = 1
+      Value = 10000
+    end
+    object LblThrottle: TLabel
+      Left = 572
+      Height = 15
+      Top = 14
+      Width = 118
+      Caption = 'Throttling (ms):'
+    end
+    object SpinThrottle: TSpinEdit
+      Left = 572
+      Height = 23
+      Top = 32
+      Width = 90
+      Increment = 10
+      MaxValue = 500
+      MinValue = 16
+      TabOrder = 2
+      Value = 33
+    end
+    object BtnStart: TButton
+      Left = 8
+      Height = 32
+      Top = 96
+      Width = 132
+      Caption = 'Iniciar Benchmark'
+      TabOrder = 3
+      OnClick = BtnStartClick
+    end
+    object BtnStop: TButton
+      Left = 148
+      Height = 32
+      Top = 96
+      Width = 110
+      Caption = 'Parar'
+      Enabled = False
+      TabOrder = 4
+      OnClick = BtnStopClick
+    end
+    object BtnTestUI: TButton
+      Left = 268
+      Height = 32
+      Top = 96
+      Width = 160
+      Caption = 'Testar Clique na UI (0)'
+      TabOrder = 5
+      OnClick = BtnTestUIClick
+    end
+    object ProgressBarMain: TProgressBar
+      Left = 444
+      Height = 26
+      Top = 99
+      Width = 320
+      Max = 1000
+      Smooth = True
+      TabOrder = 6
+    end
+  end
+  object PanelMetrics: TPanel
+    Left = 0
+    Height = 68
+    Top = 148
+    Width = 780
+    Align = alTop
+    BevelOuter = bvLowered
+    ClientHeight = 68
+    ClientWidth = 780
+    TabOrder = 1
+    object LblStatus: TLabel
+      Left = 12
+      Height = 15
+      Top = 10
+      Width = 136
+      Caption = 'Status: Pronto para iniciar'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object LblThroughput: TLabel
+      Left = 12
+      Height = 15
+      Top = 36
+      Width = 180
+      Caption = 'Vazao: 0 eventos/s | Tempo: 0 ms'
+    end
+    object LblBatches: TLabel
+      Left = 360
+      Height = 15
+      Top = 10
+      Width = 220
+      Caption = 'Lotes drenados: 0 | Processados: 0'
+    end
+    object LblLag: TLabel
+      Left = 360
+      Height = 15
+      Top = 36
+      Width = 260
+      Caption = 'Maior latencia do loop da UI: 0 ms'
+    end
+  end
+  object MemoLogs: TMemo
+    Left = 0
+    Height = 344
+    Top = 216
+    Width = 780
+    Align = alClient
+    Font.Name = 'Consolas'
+    ParentFont = False
+    ReadOnly = True
+    ScrollBars = ssAutoBoth
+    TabOrder = 2
+  end
+  object TimerHeartbeat: TTimer
+    Interval = 50
+    OnTimer = TimerHeartbeatTimer
+    Left = 720
+    Top = 24
+  end
+end

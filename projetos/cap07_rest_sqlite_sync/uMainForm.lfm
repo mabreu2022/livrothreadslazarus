@@ -1,0 +1,199 @@
+object MainForm: TMainForm
+  Left = 240
+  Height = 620
+  Top = 140
+  Width = 920
+  Caption = 'Cap. 7 - Sincronizador Hibrido REST -> SQLite WAL (SQLdb)'
+  ClientHeight = 620
+  ClientWidth = 920
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  Position = poScreenCenter
+  LCLVersion = '4.8.0.0'
+  object pnlTop: TPanel
+    Left = 0
+    Height = 104
+    Top = 0
+    Width = 920
+    Align = alTop
+    BevelOuter = bvNone
+    ClientHeight = 104
+    ClientWidth = 920
+    TabOrder = 0
+    object lblBaseUrl: TLabel
+      Left = 12
+      Height = 15
+      Top = 12
+      Width = 110
+      Caption = 'Endpoint Base REST:'
+    end
+    object edtBaseUrl: TEdit
+      Left = 132
+      Height = 23
+      Top = 8
+      Width = 530
+      Anchors = [akTop, akLeft, akRight]
+      TabOrder = 0
+    end
+    object lblConcurrency: TLabel
+      Left = 678
+      Height = 15
+      Top = 12
+      Width = 86
+      Anchors = [akTop, akRight]
+      Caption = 'Max Workers:'
+    end
+    object seConcurrency: TSpinEdit
+      Left = 772
+      Height = 23
+      Top = 8
+      Width = 64
+      Anchors = [akTop, akRight]
+      MaxValue = 16
+      MinValue = 1
+      TabOrder = 1
+      Value = 3
+    end
+    object lblDbPath: TLabel
+      Left = 12
+      Height = 15
+      Top = 44
+      Width = 108
+      Caption = 'Banco SQLite WAL:'
+    end
+    object edtDbPath: TEdit
+      Left = 132
+      Height = 23
+      Top = 40
+      Width = 530
+      Anchors = [akTop, akLeft, akRight]
+      TabOrder = 2
+    end
+    object btnStart: TButton
+      Left = 12
+      Height = 28
+      Top = 70
+      Width = 176
+      Caption = 'Iniciar Sincronizacao'
+      OnClick = btnStartClick
+      TabOrder = 3
+    end
+    object btnCancel: TButton
+      Left = 198
+      Height = 28
+      Top = 70
+      Width = 120
+      Caption = 'Cancelar'
+      Enabled = False
+      OnClick = btnCancelClick
+      TabOrder = 4
+    end
+    object btnLoadSnapshot: TButton
+      Left = 328
+      Height = 28
+      Top = 70
+      Width = 180
+      Caption = 'Recarregar Snapshot Local'
+      OnClick = btnLoadSnapshotClick
+      TabOrder = 5
+    end
+  end
+  object pnlProgress: TPanel
+    Left = 0
+    Height = 56
+    Top = 104
+    Width = 920
+    Align = alTop
+    BevelOuter = bvLowered
+    ClientHeight = 56
+    ClientWidth = 920
+    TabOrder = 1
+    object pbGlobal: TProgressBar
+      Left = 12
+      Height = 18
+      Top = 8
+      Width = 896
+      Anchors = [akTop, akLeft, akRight]
+      TabOrder = 0
+    end
+    object lblStatus: TLabel
+      Left = 12
+      Height = 15
+      Top = 32
+      Width = 420
+      Caption = 'Pronto.'
+    end
+    object lblTransfer: TLabel
+      Left = 510
+      Height = 15
+      Top = 32
+      Width = 398
+      Alignment = taRightJustify
+      Anchors = [akTop, akRight]
+      Caption = 'Transferencia: 0 bytes'
+    end
+  end
+  object pcViews: TPageControl
+    Left = 0
+    Height = 310
+    Top = 160
+    Width = 920
+    ActivePage = tsListView
+    Align = alClient
+    TabIndex = 0
+    TabOrder = 2
+    object tsListView: TTabSheet
+      Caption = 'Visao DTO (TListView)'
+      ClientHeight = 282
+      ClientWidth = 912
+      object lvPosts: TListView
+        Left = 0
+        Height = 282
+        Top = 0
+        Width = 912
+        Align = alClient
+        Columns = <>
+        ReadOnly = True
+        RowSelect = True
+        TabOrder = 0
+        ViewStyle = vsReport
+      end
+    end
+    object tsDbGrid: TTabSheet
+      Caption = 'Visao Local (TBufDataset + TDBGrid)'
+      ClientHeight = 282
+      ClientWidth = 912
+      object dbgPosts: TDBGrid
+        Left = 0
+        Height = 282
+        Top = 0
+        Width = 912
+        Align = alClient
+        Color = clWindow
+        Columns = <>
+        ReadOnly = True
+        TabOrder = 0
+      end
+    end
+  end
+  object SplitterBottom: TSplitter
+    Cursor = crVSplit
+    Left = 0
+    Height = 5
+    Top = 470
+    Width = 920
+    Align = alBottom
+    ResizeAnchor = akBottom
+  end
+  object memLog: TMemo
+    Left = 0
+    Height = 145
+    Top = 475
+    Width = 920
+    Align = alBottom
+    ReadOnly = True
+    ScrollBars = ssAutoBoth
+    TabOrder = 3
+  end
+end

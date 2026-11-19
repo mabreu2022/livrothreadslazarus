@@ -1,0 +1,135 @@
+object frmMain: TfrmMain
+  Left = 320
+  Height = 560
+  Top = 180
+  Width = 780
+  Caption = 'Cap. 5 - Laboratorio Interativo de Anomalias Concorrentes'
+  ClientHeight = 560
+  ClientWidth = 780
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  Position = poScreenCenter
+  LCLVersion = '4.8.0.0'
+  object pnlTop: TPanel
+    Left = 0
+    Height = 175
+    Top = 0
+    Width = 780
+    Align = alTop
+    BevelOuter = bvNone
+    ClientHeight = 175
+    ClientWidth = 780
+    TabOrder = 0
+    object rgExperiment: TRadioGroup
+      Left = 12
+      Height = 122
+      Top = 8
+      Width = 756
+      Anchors = [akTop, akLeft, akRight]
+      AutoFill = True
+      Caption = 'Selecione o Experimento (Os 4 Cavaleiros + False Sharing)'
+      ChildSizing.LeftRightSpacing = 8
+      ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+      ChildSizing.EnlargeVertical = crsHomogenousChildResize
+      ChildSizing.ShrinkHorizontal = crsScaleChilds
+      ChildSizing.ShrinkVertical = crsScaleChilds
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 1
+      ClientHeight = 102
+      ClientWidth = 752
+      Items.Strings = (
+        '1. Race Condition (Data Race + TOCTOU vs. Interlocked + CriticalSection)'
+        '2. Deadlock LCL (WaitFor <-> Synchronize + Watchdog vs. QueueAsyncCall)'
+        '3. Livelock (TryEnter Simetrico vs. Exponential Backoff + Ordem Global)'
+        '4. False Sharing (Array Contiguo vs. Padding 64 Bytes Alinhado)'
+      )
+      TabOrder = 0
+    end
+    object pnlButtons: TPanel
+      Left = 12
+      Height = 36
+      Top = 135
+      Width = 756
+      Anchors = [akTop, akLeft, akRight]
+      BevelOuter = bvNone
+      ClientHeight = 36
+      ClientWidth = 756
+      TabOrder = 1
+      object btnRunBroken: TButton
+        Left = 0
+        Height = 32
+        Top = 2
+        Width = 205
+        Caption = 'Executar Versao Quebrada'
+        OnClick = btnRunBrokenClick
+        TabOrder = 0
+      end
+      object btnRunFixed: TButton
+        Left = 215
+        Height = 32
+        Top = 2
+        Width = 205
+        Caption = 'Executar Versao Corrigida'
+        OnClick = btnRunFixedClick
+        TabOrder = 1
+      end
+      object btnClearLog: TButton
+        Left = 430
+        Height = 32
+        Top = 2
+        Width = 100
+        Caption = 'Limpar Log'
+        OnClick = btnClearLogClick
+        TabOrder = 2
+      end
+      object lblHeartbeat: TLabel
+        Left = 540
+        Height = 15
+        Top = 10
+        Width = 210
+        Alignment = taRightJustify
+        Anchors = [akTop, akRight]
+        AutoSize = False
+        Caption = 'UI Heartbeat: 0 ticks'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+    end
+  end
+  object memLog: TMemo
+    Left = 12
+    Height = 320
+    Top = 180
+    Width = 756
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    Font.Name = 'Consolas'
+    Font.Pitch = fpFixed
+    ParentFont = False
+    ReadOnly = True
+    ScrollBars = ssAutoBoth
+    TabOrder = 1
+  end
+  object lblStatus: TLabel
+    Left = 12
+    Height = 15
+    Top = 508
+    Width = 756
+    Anchors = [akLeft, akRight, akBottom]
+    AutoSize = False
+    Caption = 'Status: Pronto.'
+  end
+  object pbProgress: TProgressBar
+    Left = 12
+    Height = 20
+    Top = 530
+    Width = 756
+    Anchors = [akLeft, akRight, akBottom]
+    TabOrder = 2
+  end
+  object tmrHeartbeat: TTimer
+    Interval = 100
+    OnTimer = tmrHeartbeatTimer
+    Left = 720
+    Top = 16
+  end
+end

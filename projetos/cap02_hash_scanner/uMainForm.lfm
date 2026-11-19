@@ -1,0 +1,182 @@
+object frmHashScanner: TfrmHashScanner
+  Left = 280
+  Height = 600
+  Top = 140
+  Width = 920
+  Caption = 'Cap. 2 - Scanner SHA-256 com TThread, FatalException e Cancelamento'
+  ClientHeight = 600
+  ClientWidth = 920
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  Position = poScreenCenter
+  object pnlTop: TPanel
+    Left = 0
+    Height = 128
+    Top = 0
+    Width = 920
+    Align = alTop
+    BevelOuter = bvLowered
+    ClientHeight = 128
+    ClientWidth = 920
+    TabOrder = 0
+    object lblDir: TLabel
+      Left = 14
+      Height = 18
+      Top = 16
+      Width = 64
+      Caption = 'Diretorio:'
+    end
+    object edtDirectory: TEdit
+      Left = 88
+      Height = 26
+      Top = 12
+      Width = 696
+      Anchors = [akTop, akLeft, akRight]
+      TabOrder = 0
+    end
+    object btnBrowse: TButton
+      Left = 796
+      Height = 28
+      Top = 11
+      Width = 110
+      Anchors = [akTop, akRight]
+      Caption = 'Procurar...'
+      OnClick = btnBrowseClick
+      TabOrder = 1
+    end
+    object chkSubdirs: TCheckBox
+      Left = 88
+      Height = 22
+      Top = 46
+      Width = 164
+      Caption = 'Incluir subdiretorios'
+      Checked = True
+      State = cbChecked
+      TabOrder = 2
+    end
+    object chkSimulateFatal: TCheckBox
+      Left = 270
+      Height = 22
+      Top = 46
+      Width = 264
+      Caption = 'Simular FatalException no 3o arquivo'
+      TabOrder = 3
+    end
+    object btnSelfTest: TButton
+      Left = 562
+      Height = 28
+      Top = 44
+      Width = 142
+      Anchors = [akTop, akRight]
+      Caption = 'Autoteste NIST'
+      OnClick = btnSelfTestClick
+      TabOrder = 4
+    end
+    object btnStart: TButton
+      Left = 712
+      Height = 28
+      Top = 44
+      Width = 94
+      Anchors = [akTop, akRight]
+      Caption = 'Iniciar'
+      OnClick = btnStartClick
+      TabOrder = 5
+    end
+    object btnCancel: TButton
+      Left = 812
+      Height = 28
+      Top = 44
+      Width = 94
+      Anchors = [akTop, akRight]
+      Caption = 'Cancelar'
+      Enabled = False
+      OnClick = btnCancelClick
+      TabOrder = 6
+    end
+    object pbScan: TProgressBar
+      Left = 14
+      Height = 20
+      Top = 80
+      Width = 892
+      Anchors = [akTop, akLeft, akRight]
+      TabOrder = 7
+    end
+    object lblStatus: TLabel
+      Left = 14
+      Height = 18
+      Top = 104
+      Width = 560
+      Caption = 'Pronto para iniciar.'
+    end
+    object lblSysInfo: TLabel
+      Left = 600
+      Height = 18
+      Top = 104
+      Width = 306
+      Alignment = taRightJustify
+      Anchors = [akTop, akRight]
+      Caption = 'CPUs: -- | HeapTrc: --'
+    end
+  end
+  object lvResults: TListView
+    Left = 0
+    Height = 440
+    Top = 128
+    Width = 920
+    Align = alClient
+    Columns = <
+      item
+        Caption = 'Arquivo'
+        Width = 290
+      end
+      item
+        Alignment = taRightJustify
+        Caption = 'Tamanho (B)'
+        Width = 100
+      end
+      item
+        Caption = 'SHA-256'
+        Width = 330
+      end
+      item
+        Alignment = taRightJustify
+        Caption = 'Tempo (ms)'
+        Width = 82
+      end
+      item
+        Caption = 'Situacao'
+        Width = 100
+      end>
+    Font.Name = 'Consolas'
+    ParentFont = False
+    ReadOnly = True
+    RowSelect = True
+    TabOrder = 1
+    ViewStyle = vsReport
+  end
+  object pnlBottom: TPanel
+    Left = 0
+    Height = 32
+    Top = 568
+    Width = 920
+    Align = alBottom
+    BevelOuter = bvLowered
+    ClientHeight = 32
+    ClientWidth = 920
+    TabOrder = 2
+    object lblSummary: TLabel
+      Left = 14
+      Height = 18
+      Top = 7
+      Width = 892
+      Anchors = [akTop, akLeft, akRight]
+      Caption = 'Resumo: nenhum escaneamento executado.'
+    end
+  end
+  object dlgSelectDir: TSelectDirectoryDialog
+    Title = 'Selecionar diretorio para calcular SHA-256'
+    Left = 740
+    Top = 160
+  end
+end

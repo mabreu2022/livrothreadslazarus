@@ -1,0 +1,274 @@
+object MainForm: TMainForm
+  Left = 300
+  Height = 560
+  Top = 160
+  Width = 800
+  Caption = 'Cap. 4 - Cache Thread-Safe com MREW, TEvent, Lock-Free e Semaforo'
+  ClientHeight = 560
+  ClientWidth = 800
+  Position = poScreenCenter
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  object PanelConfig: TPanel
+    Left = 0
+    Height = 122
+    Top = 0
+    Width = 800
+    Align = alTop
+    BevelOuter = bvLowered
+    ClientHeight = 122
+    ClientWidth = 800
+    TabOrder = 0
+    object LblReaders: TLabel
+      Left = 14
+      Height = 15
+      Top = 14
+      Width = 84
+      Caption = 'Leitores (MREW):'
+    end
+    object SpinReaders: TSpinEdit
+      Left = 14
+      Height = 23
+      Top = 32
+      Width = 80
+      MaxValue = 32
+      MinValue = 1
+      TabOrder = 0
+      Value = 6
+    end
+    object LblWriters: TLabel
+      Left = 114
+      Height = 15
+      Top = 14
+      Width = 64
+      Caption = 'Escritores:'
+    end
+    object SpinWriters: TSpinEdit
+      Left = 114
+      Height = 23
+      Top = 32
+      Width = 80
+      MaxValue = 16
+      MinValue = 1
+      TabOrder = 1
+      Value = 2
+    end
+    object LblPermits: TLabel
+      Left = 214
+      Height = 15
+      Top = 14
+      Width = 120
+      Caption = 'Semaforo (Max Slots):'
+    end
+    object SpinPermits: TSpinEdit
+      Left = 214
+      Height = 23
+      Top = 32
+      Width = 80
+      MaxValue = 16
+      MinValue = 1
+      TabOrder = 2
+      Value = 2
+    end
+    object LblTTL: TLabel
+      Left = 346
+      Height = 15
+      Top = 14
+      Width = 80
+      Caption = 'TTL padrao (ms):'
+    end
+    object SpinTTL: TSpinEdit
+      Left = 346
+      Height = 23
+      Top = 32
+      Width = 96
+      Increment = 500
+      MaxValue = 30000
+      MinValue = 250
+      TabOrder = 3
+      Value = 2000
+    end
+    object LblCleanup: TLabel
+      Left = 462
+      Height = 15
+      Top = 14
+      Width = 116
+      Caption = 'Limpeza TEvent (ms):'
+    end
+    object SpinCleanup: TSpinEdit
+      Left = 462
+      Height = 23
+      Top = 32
+      Width = 96
+      Increment = 250
+      MaxValue = 10000
+      MinValue = 200
+      TabOrder = 4
+      Value = 1000
+    end
+    object BtnStartStress: TButton
+      Left = 14
+      Height = 32
+      Top = 74
+      Width = 146
+      Caption = 'Iniciar Teste de Carga'
+      TabOrder = 5
+      OnClick = BtnStartStressClick
+    end
+    object BtnStopStress: TButton
+      Left = 170
+      Height = 32
+      Top = 74
+      Width = 116
+      Caption = 'Parar Carga'
+      Enabled = False
+      TabOrder = 6
+      OnClick = BtnStopStressClick
+    end
+    object BtnPurgeNow: TButton
+      Left = 296
+      Height = 32
+      Top = 74
+      Width = 140
+      Caption = 'Purgar Expirados'
+      TabOrder = 7
+      OnClick = BtnPurgeNowClick
+    end
+    object BtnClearCache: TButton
+      Left = 446
+      Height = 32
+      Top = 74
+      Width = 112
+      Caption = 'Limpar Cache'
+      TabOrder = 8
+      OnClick = BtnClearCacheClick
+    end
+  end
+  object PanelManual: TPanel
+    Left = 0
+    Height = 62
+    Top = 122
+    Width = 800
+    Align = alTop
+    BevelOuter = bvLowered
+    ClientHeight = 62
+    ClientWidth = 800
+    TabOrder = 1
+    object LblKey: TLabel
+      Left = 14
+      Height = 15
+      Top = 22
+      Width = 36
+      Caption = 'Chave:'
+    end
+    object EditKey: TEdit
+      Left = 58
+      Height = 23
+      Top = 18
+      Width = 140
+      TabOrder = 0
+      Text = 'item:0'
+    end
+    object LblVal: TLabel
+      Left = 212
+      Height = 15
+      Top = 22
+      Width = 32
+      Caption = 'Valor:'
+    end
+    object EditValue: TEdit
+      Left = 250
+      Height = 23
+      Top = 18
+      Width = 210
+      TabOrder = 1
+      Text = 'payload-manual-v1'
+    end
+    object BtnPutManual: TButton
+      Left = 474
+      Height = 28
+      Top = 16
+      Width = 120
+      Caption = 'Gravar (Put)'
+      TabOrder = 2
+      OnClick = BtnPutManualClick
+    end
+    object BtnGetManual: TButton
+      Left = 604
+      Height = 28
+      Top = 16
+      Width = 120
+      Caption = 'Ler (TryGet)'
+      TabOrder = 3
+      OnClick = BtnGetManualClick
+    end
+  end
+  object PanelStats: TPanel
+    Left = 0
+    Height = 118
+    Top = 184
+    Width = 800
+    Align = alTop
+    BevelOuter = bvLowered
+    ClientHeight = 118
+    ClientWidth = 800
+    TabOrder = 2
+    object LblStatsTitle: TLabel
+      Left = 14
+      Height = 15
+      Top = 10
+      Width = 260
+      Caption = 'Estatisticas Lock-Free (Interlocked*64)'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object LblCacheCounts: TLabel
+      Left = 14
+      Height = 15
+      Top = 34
+      Width = 360
+      Caption = 'Hits: 0 | Misses: 0 | Taxa de Acerto: 0,0%'
+    end
+    object LblCacheWrites: TLabel
+      Left = 14
+      Height = 15
+      Top = 58
+      Width = 360
+      Caption = 'Puts: 0 | Expirados (TTL): 0 | Itens ativos: 0'
+    end
+    object LblSemaphoreStats: TLabel
+      Left = 14
+      Height = 15
+      Top = 84
+      Width = 520
+      Caption = 'Semaforo Origem -> Ativos: 0 | Pico: 0 / Limite: 2 | Acquires: 0 | Timeouts: 0'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object LblOpsRate: TLabel
+      Left = 440
+      Height = 15
+      Top = 34
+      Width = 280
+      Caption = 'Leituras/s: 0 | Escritas/s: 0'
+    end
+  end
+  object MemoEvents: TMemo
+    Left = 0
+    Height = 258
+    Top = 302
+    Width = 800
+    Align = alClient
+    Font.Name = 'Consolas'
+    ParentFont = False
+    ReadOnly = True
+    ScrollBars = ssAutoBoth
+    TabOrder = 3
+  end
+  object TimerStats: TTimer
+    Interval = 250
+    OnTimer = TimerStatsTimer
+    Left = 740
+    Top = 20
+  end
+end

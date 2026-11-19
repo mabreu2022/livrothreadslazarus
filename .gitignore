@@ -1,0 +1,35 @@
+# Artefatos de compilacao Free Pascal / Lazarus
+*.exe
+*.dll
+*.so
+*.dylib
+*.o
+*.obj
+*.ppu
+*.rst
+*.a
+*.or
+*.compiled
+*.dbg
+*.dSYM/
+*.trc
+*.lps
+*.bak
+*.sqlite3
+*.sqlite3-wal
+*.sqlite3-shm
+lib/
+bin/
+backup/
+
+# Manuscrito editorial, scripts de diagramacao e PDFs comerciais do livro
+# (mantidos apenas localmente para proteger a publicacao na Uiclap)
+manuscrito/
+build/
+*.pdf
+
+# Python / SO
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
